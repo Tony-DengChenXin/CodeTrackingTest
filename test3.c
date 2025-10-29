@@ -1,7 +1,8 @@
 #include <stdio.h>
 
-int add(int num1, int num3) {
-    return num1 + num3;
+int add(int a, int b) {
+    int sum = a + b;
+    return sum;
 }
 
 int main() {
