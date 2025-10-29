@@ -1,29 +1,42 @@
 #include <stdio.h>
+#include <math.h> 
 
 
-int calculate(int num1, int num2, char operation) {
+int calculate(double num1, double num2, char operation, int precision) {
+    double result;
+    
     switch(operation) {
         case '+':
-            return num1 + num2;
+            result = num1 + num2;
+            break;
         case '-':
-            return num1 - num2;
+            result = num1 - num2;
+            break;
         case '*':
-            return num1 * num2;
+            result = num1 * num2;
+            break;
         case '/':
-            if(num2 != 0) return num1 / num2;
-            else return 0; 
+            if(num2 != 0.0) result = num1 / num2;
+            else result = 0.0; 
+            break;
+        case '^': 
+            result = pow(num1, num2);
+            break;
         default:
-            return num1 + num2; 
+            result = num1 + num2;
     }
+    
+    
+    double factor = pow(10, precision);
+    return (int)(result * factor + 0.5); /
 }
 
 int main() {
-    int a = 15, b = 25;
+    double a = 15.5, b = 3.0;
     
-    
-    printf("\nSum of %d and %d is: %d\n", a, b, calculate(a, b, '+'));
-    printf("Difference of %d and %d is: %d\n", a, b, calculate(a, b, '-'));
-    printf("Product of %d and %d is: %d\n", a, b, calculate(a, b, '*'));
+    printf("Sum (rounded): %d\n", calculate(a, b, '+', 0));
+    printf("Division (2 decimals): %d\n", calculate(a, b, '/', 2));
+    printf("Power (1 decimal): %d\n", calculate(a, b, '^', 1));
     
     return 0;
 }
